@@ -3,18 +3,21 @@ import { TextField, Button, Box, Typography } from '@mui/material';
 import useAuthStore from '../store/authStore';
 import '../styles/style.css';
 
-const LoginForm: React.FC = () => {
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string>('');
-    const login  = useAuthStore((state) => state.login);
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+   const [error, setError] = useState('');
+  const login = useAuthStore((state) => state.login);
 
-    const handleSubmit = async (e: React.FormEvent)=> {
-        e.preventDefault();
-        const success = await login(username,password);
-        if (!success) setError('Invalid Username or password');
-
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await login(username, password);
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
 
     return(
         <Box className="login-box">
@@ -37,11 +40,15 @@ const LoginForm: React.FC = () => {
                     value={password}
                     onChange={(e)=> setPassword(e.target.value)}
                     />
-                {error && <Typography color='error'>{error}</Typography>}
+                {error && (
+                    <Typography color="error" sx={{ mt: 1 }}>
+                    {error}
+                    </Typography>
+                )}
                 <Button type='submit' variant='contained' fullWidth sx={{mt: 5}}>Login</Button>
             </form>
         </Box>
     );
 };
 
-export default LoginForm;
+export default Login;
