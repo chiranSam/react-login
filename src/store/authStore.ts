@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { login as loginApi, getProfile } from '../api/auth';
+import { login as loginApi, getProfile} from '../api/auth';
 
 interface AuthState {
   user: string | null;
@@ -22,7 +22,6 @@ const useAuthStore = create<AuthState>((set) => ({
       throw error;
     }
   },
-
   fetchProfile: async () => {
     try {
       const user = await getProfile();
@@ -32,7 +31,6 @@ const useAuthStore = create<AuthState>((set) => ({
       set({ user: null, isAuthenticated: false });
     }
   },
-
   logout: () => {
     localStorage.removeItem('token');
     set({ user: null, isAuthenticated: false });

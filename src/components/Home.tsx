@@ -1,6 +1,6 @@
 import React from "react";
 import '../styles/home.css';
-import { Button, Box, Typography } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import useAuthStore from "../store/authStore";
 
 

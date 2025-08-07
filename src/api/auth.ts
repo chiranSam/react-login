@@ -9,7 +9,7 @@ export const login = async (username: string, password: string) => {
 
   if (res.ok) {
     localStorage.setItem('token', data.token);
-    return data; // Return the user data (username, token, etc.)
+    return data; 
   } else {
     throw new Error(data.message);
   }
